@@ -11,6 +11,7 @@
 		6A53F16B2850C6F300D5BC09 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A53F16A2850C6F300D5BC09 /* ViewController.swift */; };
 		6A53F1702850C6F400D5BC09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A53F16F2850C6F400D5BC09 /* Assets.xcassets */; };
 		6A53F1732850C6F400D5BC09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A53F1712850C6F400D5BC09 /* LaunchScreen.storyboard */; };
+		6A53F17C2850D9C600D5BC09 /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A53F17B2850D9C600D5BC09 /* PasswordTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		6A53F16F2850C6F400D5BC09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6A53F1722850C6F400D5BC09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6A53F1742850C6F400D5BC09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6A53F17B2850D9C600D5BC09 /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,13 +54,22 @@
 		6A53F1652850C6F300D5BC09 /* Password */ = {
 			isa = PBXGroup;
 			children = (
+				6A53F17A2850D99B00D5BC09 /* Others  */,
 				6A53F1662850C6F300D5BC09 /* AppDelegate.swift */,
 				6A53F16A2850C6F300D5BC09 /* ViewController.swift */,
+				6A53F17B2850D9C600D5BC09 /* PasswordTextField.swift */,
+			);
+			path = Password;
+			sourceTree = "<group>";
+		};
+		6A53F17A2850D99B00D5BC09 /* Others  */ = {
+			isa = PBXGroup;
+			children = (
 				6A53F16F2850C6F400D5BC09 /* Assets.xcassets */,
 				6A53F1712850C6F400D5BC09 /* LaunchScreen.storyboard */,
 				6A53F1742850C6F400D5BC09 /* Info.plist */,
 			);
-			path = Password;
+			name = "Others ";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,6 +144,7 @@
 			files = (
 				6A53F16B2850C6F300D5BC09 /* ViewController.swift in Sources */,
 				6A53F1672850C6F300D5BC09 /* AppDelegate.swift in Sources */,
+				6A53F17C2850D9C600D5BC09 /* PasswordTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
