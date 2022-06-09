@@ -32,6 +32,7 @@ extension ViewController {
         
         //MARK: - <newPasswordTextField>
         newPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
+        newPasswordTextField.delegate = self
         
         //MARK: - <passwordStatusView>
         statusView.translatesAutoresizingMaskIntoConstraints = false
@@ -71,3 +72,10 @@ extension ViewController {
     }
 }
 
+extension ViewController: PasswordTextFieldDelegate {
+    func editingChanged(_ sender: PasswordTextField) {
+        if sender === newPasswordTextField { //Checking is they both reference to same memory. only works on classes
+            statusView.updateDisplay(sender.textField.text ?? "")
+        }
+    }
+}

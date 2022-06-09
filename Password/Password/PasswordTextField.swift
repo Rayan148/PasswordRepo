@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol PasswordTextFieldDelegate: AnyObject {
+    func editingChanged(_ sender: PasswordTextField)
+}
+
 class PasswordTextField: UIView, UITextFieldDelegate {
     
     let lockImageView = UIImageView(image: UIImage(systemName: "lock.fill"))
@@ -16,6 +20,8 @@ class PasswordTextField: UIView, UITextFieldDelegate {
     let dividerView = UIView()
     let errorLabel = UILabel()
     
+    weak var delegate: PasswordTextFieldDelegate? //To avoid the retain cycle we are making the delegate weak.
+
     init(placeHolderText2: String) {
         self.placeHolderText = placeHolderText2
         super.init(frame: .zero)
@@ -47,13 +53,15 @@ extension PasswordTextField {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.isSecureTextEntry = true
         textField.placeholder = placeHolderText
-        //        textField.delegate = self
+        textField.delegate = self
         textField.keyboardType = .asciiCapable //.asciiCapable keyboard type disables user to enter emojis
         textField.attributedPlaceholder = NSAttributedString(string: placeHolderText,
                                                              attributes: [NSAttributedString
                                                                             .Key
                                                                             .foregroundColor: UIColor
                                                                             .secondaryLabel]) //Giving the attributes to the placeholed text
+        // extra interaction
+        textField.addTarget(self, action: #selector(textFieldEditingChanged), for: .editingChanged)
         
         //MARK: - <eyeButton>
         eyeButton.translatesAutoresizingMaskIntoConstraints = false
@@ -71,11 +79,11 @@ extension PasswordTextField {
         errorLabel.text = "Your password must meet the requirements below."
         errorLabel.font = .preferredFont(forTextStyle: .footnote)
         errorLabel.textColor = UIColor.systemRed
-//        errorLabel.adjustsFontSizeToFitWidth = true //Reduces the font size to adjust the text in the allocated space.
-//        errorLabel.minimumScaleFactor = 0.8 //Reduce the font size only up to 80%. Not more than 80%.
+        //        errorLabel.adjustsFontSizeToFitWidth = true //Reduces the font size to adjust the text in the allocated space.
+        //        errorLabel.minimumScaleFactor = 0.8 //Reduce the font size only up to 80%. Not more than 80%.
         errorLabel.numberOfLines = 0
         errorLabel.lineBreakMode = .byWordWrapping
-        errorLabel.isHidden = false
+        errorLabel.isHidden = true
         
     }
     
@@ -105,11 +113,6 @@ extension PasswordTextField {
             eyeButton.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
         
-        //MARK: - <Content-Hugging-Compression-Resistance>
-        lockImageView.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
-        textField.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .horizontal)
-        eyeButton.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
-        
         //MARK: - <dividerView>
         dividerView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         dividerView.topAnchor.constraint(equalToSystemSpacingBelow: textField.bottomAnchor, multiplier: 1).isActive = true
@@ -120,6 +123,12 @@ extension PasswordTextField {
         errorLabel.topAnchor.constraint(equalTo: dividerView.bottomAnchor, constant: 4).isActive = true
         errorLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         errorLabel.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        
+        //MARK: - <Content-Hugging-Compression-Resistance>
+        lockImageView.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
+        textField.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .horizontal)
+        eyeButton.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
+        
     }
 }
 
@@ -128,4 +137,9 @@ extension PasswordTextField {
         textField.isSecureTextEntry.toggle()
         eyeButton.isSelected.toggle()
     }
+    
+    @objc func textFieldEditingChanged(_ sender: UITextField) {
+        delegate?.editingChanged(self) //send back the text and the viewController receives it through the delegate
+    }
 }
+
