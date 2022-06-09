@@ -33,7 +33,7 @@ class PasswordCriteriaView: UIView {
         imageView.image = circleImage
     }
 
-    init(text: String) {
+    init(text: String) {  //making this view reusable.
         super.init(frame: .zero) //.zero: This means initially the view will have no size. Autolayout will take care of this.
         
         label.text = text

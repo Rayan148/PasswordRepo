@@ -11,7 +11,9 @@ class ViewController: UIViewController {
     
     let stackView = UIStackView()
     let newPasswordTextField = PasswordTextField(placeHolderText2: "New Password")
-    let criteriaView = PasswordCriteriaView(text: "Uppercase Letter (A-Z)")
+    let statusView = PasswordStatusView()
+    let confirmPasswordTextField = PasswordTextField(placeHolderText2: "Re-enter new password")
+    let resetButton = UIButton(type: .system)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,22 +25,34 @@ class ViewController: UIViewController {
 extension ViewController {
     func style() {
         
-        //MARK: - <newPasswordTextField>
-        newPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
-        
-        //MARK: - <passwordCriteriaView>
-        criteriaView.translatesAutoresizingMaskIntoConstraints = false
-        
         //MARK: - <stackView>
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 20
+        
+        //MARK: - <newPasswordTextField>
+        newPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
+        
+        //MARK: - <passwordStatusView>
+        statusView.translatesAutoresizingMaskIntoConstraints = false
+        statusView.layer.cornerRadius = 10
+        statusView.clipsToBounds = true
+        
+        //MARK: - <confirmPasswordTextField>
+        confirmPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
+        
+        //MARK: - <resetButton>
+        resetButton.translatesAutoresizingMaskIntoConstraints = false
+        resetButton.configuration = .filled()
+        resetButton.setTitle("Reset Password", for: .normal)
+//        resetButton.addTarget(self, action: #selector(resetPasswordButtonTapped), for: .primaryActionTriggered)
     }
     
     func layout() {
-//        view.addSubview(newPasswordTextField)
-//        stackView.addArrangedSubview(newPasswordTextField)
-        stackView.addArrangedSubview(criteriaView)
+        stackView.addArrangedSubview(newPasswordTextField)
+        stackView.addArrangedSubview(statusView)
+        stackView.addArrangedSubview(confirmPasswordTextField)
+        stackView.addArrangedSubview(resetButton)
         view.addSubview(stackView)
         
 //        NSLayoutConstraint.activate([
